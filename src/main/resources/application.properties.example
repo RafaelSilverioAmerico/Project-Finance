@@ -1,0 +1,11 @@
+spring.application.name=Finance
+
+spring.datasource.url=jdbc:mysql://localhost:3306/gastos_user
+spring.datasource.username=SEU_USUARIO_AQUI
+spring.datasource.password=SUA_SENHA_AQUI
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+app.jwt.secret=GERE_UMA_CHAVE_COM_OPENSSL_RAND
+app.jwt.expiration-ms=7200000
