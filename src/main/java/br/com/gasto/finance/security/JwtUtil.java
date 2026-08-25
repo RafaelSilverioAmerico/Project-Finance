@@ -25,6 +25,8 @@ public class JwtUtil {
         this.expirationMs = expirationMs;
     }
 
+    // Criação do token
+
     public String generateToken(Long userId, String email) {
 
         Date now = new Date();
@@ -39,6 +41,8 @@ public class JwtUtil {
                 .compact();          // gera a String final
     }
 
+    // Extrair o token do Email
+
     public String extractEmail(String token) {
 
         return Jwts.parser()
@@ -49,6 +53,8 @@ public class JwtUtil {
                 .getSubject();
     }
 
+    // Extrair o userId
+
     public Long extractUserId(String token) {
 
         return Jwts.parser()
@@ -57,5 +63,26 @@ public class JwtUtil {
                 .parseSignedClaims(token)
                 .getPayload()
                 .get("userId", Long.class);
+    }
+
+    private Date extractExpiration(String token) {
+        return Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .getExpiration();
+    }
+
+    // Verificar se o token ainda e valido
+
+    public boolean isTokenValid(String token, String email) {
+
+        return extractEmail(token).equals(email) && !isTokenExpired(token);
+    }
+
+    private boolean isTokenExpired(String token) {
+
+        return extractExpiration(token).before(new Date());
     }
 }
