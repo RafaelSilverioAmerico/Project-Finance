@@ -38,4 +38,24 @@ public class JwtUtil {
                 .signWith(key)       // assina com sua chave secreta
                 .compact();          // gera a String final
     }
+
+    public String extractEmail(String token) {
+
+        return Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .getSubject();
+    }
+
+    public Long extractUserId(String token) {
+
+        return Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .get("userId", Long.class);
+    }
 }
