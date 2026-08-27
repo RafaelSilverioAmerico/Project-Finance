@@ -24,7 +24,7 @@ public class CategoryService {
                 .toList();
     }
 
-    public CategoryResponse criar(Long userId, CategoryRequest req) {
+    public CategoryResponse criar (Long userId, CategoryRequest req) {
         User user = userRepository.getReferenceById(userId);
 
         Category category = new Category();
