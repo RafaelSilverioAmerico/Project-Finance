@@ -30,7 +30,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> escluir(@AuthenticationPrincipal AuthenticatedUser user, @PathVariable Long id) {
+    public ResponseEntity<Void> excluir(@AuthenticationPrincipal AuthenticatedUser user, @PathVariable Long id) {
        categoryService.excluir(user.id(), id);
        return ResponseEntity.noContent().build();
     }
