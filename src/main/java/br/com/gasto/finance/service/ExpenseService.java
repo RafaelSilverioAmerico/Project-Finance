@@ -11,6 +11,9 @@ import br.com.gasto.finance.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ExpenseService {
@@ -33,6 +36,21 @@ public class ExpenseService {
         expense.setUser(user);
 
         return ExpenseResponse.fromEntity(expenseRepository.save(expense));
+    }
+
+    public List<ExpenseResponse> listarPorPeriodo(Long userId, LocalDate inicio, LocalDate fim) {
+
+        return expenseRepository.findByUserIdAndDataBetween(userId,inicio,fim).stream()
+                .map(ExpenseResponse::fromEntity)
+                .toList();
+    }
+
+    public void excluir(Long userId, Long expenseId) {
+
+         Expense expense = expenseRepository.findByUserIdAndId(userId, expenseId)
+                .orElseThrow(() -> new IllegalArgumentException("Valor não encontrado"));
+
+        expenseRepository.delete(expense);
     }
 }
 
