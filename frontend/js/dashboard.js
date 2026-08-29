@@ -16,3 +16,18 @@ async function carregarCategorias() {
     select.innerHTML = categorias.map(c => `<option value="${c.id}">${c.nome}</option>`).join('');
 }
 carregarCategorias();
+
+document.getElementById('form-gasto').addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const dados = Object.fromEntries(new FormData(e.target));
+    dados.categoriaId = Number(dados.categoriaId);
+    dados.valor = Number(dados.valor);
+
+    try {
+        await Api.criarGasto(dados);
+        e.target.reset();
+    } catch (err) {
+        alert(err.message);
+    }
+});
