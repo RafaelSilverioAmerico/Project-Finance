@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Meu Caixa — Painel</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h1>Meu Caixa</h1>
+<span id="user-name"></span>
+<button id="btn-logout">Sair</button>
+
+<hr>
+
+<h2>Registrar gasto</h2>
+<form id="form-gasto">
+    <input type="text" name="descricao" placeholder="Descrição">
+    <input type="number" name="valor" step="0.01" placeholder="Valor">
+    <input type="date" name="data">
+    <select name="categoriaId" id="select-categoria"></select>
+    <button type="submit">Adicionar</button>
+</form>
+
+<hr>
+
+<h2>Lançamentos</h2>
+<div id="lista-gastos"></div>
+
+<script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>
