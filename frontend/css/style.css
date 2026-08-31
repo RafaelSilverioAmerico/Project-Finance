@@ -1,0 +1,80 @@
+:root {
+    --bg: #0E1721;
+    --surface: #16212F;
+    --texto: #EDEAE0;
+    --destaque: #D4A73C;
+    --erro: #B72D26;
+    --borda: #29394B;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--texto);
+    font-family: sans-serif;
+}
+
+h1, h2 {
+    color: var(--destaque);
+}
+
+input, select, button {
+    background-color: var(--surface);
+    color: var(--texto);
+    border: 1px solid var(--borda);
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+button {
+    background-color: var(--destaque);
+    color: var(--bg);
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--texto);
+    font-family: sans-serif;
+    padding: 24px;
+}
+
+h1, h2 {
+    color: var(--destaque);
+    margin-top: 32px;
+    margin-bottom: 12px;
+}
+
+#form-gasto, #lista-gastos {
+    background-color: var(--surface);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+#form-gasto {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--borda);
+    margin: 24px 0;
+}
+
+#lista-gastos div {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--borda);
+}
+
+#lista-gastos div:last-child {
+    border-bottom: none;
+}
