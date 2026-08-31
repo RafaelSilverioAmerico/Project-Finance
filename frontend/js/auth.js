@@ -25,3 +25,13 @@ document.getElementById('form-registro').addEventListener('submit', async (e) =>
         alert(err.message);
     }
 });
+
+document.getElementById('btn-alternar').addEventListener('click', () => {
+    const login = document.getElementById('form-login');
+    const registro = document.getElementById('form-registro');
+
+    const mostrandoLogin = login.style.display !== 'none';
+
+    login.style.display = mostrandoLogin ? 'none' : 'flex';
+    registro.style.display = mostrandoLogin ? 'flex' : 'none';
+});
