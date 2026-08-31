@@ -6,19 +6,27 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div class="auth-container">
+    <div class="auth-painel">
+        <h2>Bem-Vindo</h2>
+        <p>Controle seus gastos com o meu Caixa</p>
+    </div>
 
-    <form id="form-login">
-        <input type="email" name="email" placeholder="Email">
-        <input type="password" name="senha" placeholder="Senha">
-        <button type="submit">Entrar</button>
+    <div class="auth-formulario">
+        <form id="form-login">
+            <input type="email" name="email" placeholder="Email">
+            <input type="password" name="senha" placeholder="Senha">
+            <button type="submit">Entrar</button>
         </form>
 
-    <form id="form-registro">
-        <input type="text" name="nome" placeholder="Nome">
-        <input type="email" name="email" placeholder="Email">
-        <input type="password" name="senha" placeholder="Senha">
-        <button type="submit">Cadastrar</button>
-    </form>
+        <form id="form-registro" style="display: none">
+            <input type="text" name="nome" placeholder="Nome">
+            <input type="email" name="email" placeholder="Email">
+            <input type="password" name="senha" placeholder="Senha">
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+</div>
 
 <script src="js/api.js"></script>
 <script src="js/auth.js"></script>

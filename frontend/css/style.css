@@ -30,6 +30,8 @@ input, select, button {
     font-size: 14px;
 }
 
+/* Cor do botão*/
+
 button {
     background-color: var(--destaque);
     color: var(--bg);
@@ -78,3 +80,40 @@ hr {
 #lista-gastos div:last-child {
     border-bottom: none;
 }
+
+.auth-container {
+    display: flex;
+    max-width: 700px;
+    margin: 80px auto;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.auth-painel {
+    flex: 1;
+    background: linear-gradient(135deg, var(--destaque), var(--erro));
+    padding: 40px;
+    color: var(--bg);
+}
+
+.auth-formulario {
+    flex: 1;
+    background-color: var(--surface);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+}
+
+#form-login, #form-registro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.auth-painel h2 {
+    color: var(--bg);
+}
+
+
