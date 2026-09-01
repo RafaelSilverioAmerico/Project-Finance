@@ -36,7 +36,8 @@ document.getElementById('form-gasto').addEventListener("submit", async (e) => {
 async function carregarGastos() {
     const hoje = new Date();
     const inicio = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, '0')}-01`;
-    const fim = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, '0')}-31`;
+    const ultimoDia = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0).getDate();
+    const fim = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, '0')}-${String(ultimoDia).padStart(2, '0')}`;
 
     const gastos = await Api.listarGastos(inicio, fim);
     const container = document.getElementById('lista-gastos');
@@ -44,8 +45,17 @@ async function carregarGastos() {
     container.innerHTML = gastos.map(g => `
     <div>
         <strong>${g.descricao}</strong> - R$ ${g.valor} - ${g.categoriaNome} (${g.data})
+        <button class="btn-excluir" data-id="${g.id}">Excluir</button>
     </div>
     `).join('');
+
+    document.querySelectorAll('.btn-excluir').forEach(botao => {
+        botao.addEventListener('click', async () => {
+            const id = botao.dataset.id;
+            await Api.excluirGasto(id);
+        });
+    });
+
 }
 
 carregarGastos();
@@ -74,3 +84,4 @@ client.onConnect = () => {
 };
 
 client.activate();
+
