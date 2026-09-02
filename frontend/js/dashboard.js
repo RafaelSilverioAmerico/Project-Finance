@@ -33,21 +33,29 @@ document.getElementById('form-gasto').addEventListener("submit", async (e) => {
     }
 });
 
-async function carregarGastos() {
-    const hoje = new Date();
-    const inicio = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, '0')}-01`;
-    const ultimoDia = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0).getDate();
-    const fim = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, '0')}-${String(ultimoDia).padStart(2, '0')}`;
+async function carregarResumo(periodo) {
+    let resumo;
 
-    const gastos = await Api.listarGastos(inicio, fim);
+    if (periodo === 'diario') {
+        resumo = await Api.resumoDiario();
+    } else if (periodo === 'semanal') {
+        resumo = await Api.resumoSemanal();
+    } else if (periodo === 'mensal') {
+        const hoje = new Date();
+        resumo = await Api.resumoMensal(hoje.getFullYear(), hoje.getMonth() + 1);
+    }
+
+    document.getElementById('total-mes').textContent = resumo.total.toFixed(2).replace('.', ',');
+
+    const gastos = await Api.listarGastos(resumo.inicio, resumo.fim);
     const container = document.getElementById('lista-gastos');
 
     container.innerHTML = gastos.map(g => `
-    <div>
-        <strong>${g.descricao}</strong> - R$ ${g.valor} - ${g.categoriaNome} (${g.data})
-        <button class="btn-excluir" data-id="${g.id}">Excluir</button>
-    </div>
-    `).join('');
+<div>
+    <strong>${g.descricao}</strong> - R$ ${g.valor} - ${g.categoriaNome} (${g.data})
+    <button class="btn-excluir" data-id="${g.id}">Excluir</button>
+</div>
+`).join('');
 
     document.querySelectorAll('.btn-excluir').forEach(botao => {
         botao.addEventListener('click', async () => {
@@ -55,18 +63,18 @@ async function carregarGastos() {
             await Api.excluirGasto(id);
         });
     });
-
 }
 
-carregarGastos();
+let periodoAtual = 'mensal';
 
-async function carregarResumo() {
-    const hoje = new Date();
-    const resumo = await Api.resumoMensal(hoje.getFullYear(), hoje.getMonth() + 1);
-    document.getElementById('total-mes').textContent = resumo.total.toFixed(2).replace('.', ',');
-}
+document.querySelectorAll('.tab-periodo').forEach(botao => {
+    botao.addEventListener('click', () => {
+        periodoAtual = botao.dataset.periodo;
+        carregarResumo(periodoAtual);
+    });
+});
 
-carregarResumo();
+carregarResumo('mensal');
 
 const socket = new SockJS(`http://localhost:8080/ws`);
 const client = new StompJs.Client({
@@ -78,8 +86,7 @@ client.onConnect = () => {
         const evento = JSON.parse(mensagem.body);
         console.log('Evento recebido:', evento);
 
-        carregarGastos();
-        carregarResumo();
+        carregarResumo(periodoAtual);
     });
 };
 
