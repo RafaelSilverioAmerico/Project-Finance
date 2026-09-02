@@ -160,4 +160,9 @@ hr {
     opacity: 0.8;
 }
 
+.tab-periodo.ativo {
+    background-color: var(--erro);
+    color: var(--texto);
+}
+
 

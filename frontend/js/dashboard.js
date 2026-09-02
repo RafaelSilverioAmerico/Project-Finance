@@ -49,6 +49,8 @@ async function carregarResumo(periodo) {
 
     const gastos = await Api.listarGastos(resumo.inicio, resumo.fim);
     const container = document.getElementById('lista-gastos');
+    const titulos = {diario: 'Resumo do dia', semanal: 'Resumo da semana', mensal: 'Resumo do mês'};
+    document.getElementById('resumo-titulo').textContent = titulos[periodo];
 
     container.innerHTML = gastos.map(g => `
 <div>
@@ -69,6 +71,9 @@ let periodoAtual = 'mensal';
 
 document.querySelectorAll('.tab-periodo').forEach(botao => {
     botao.addEventListener('click', () => {
+        document.querySelectorAll('.tab-periodo').forEach(b => b.classList.remove('ativo'));
+        botao.classList.add('ativo');
+
         periodoAtual = botao.dataset.periodo;
         carregarResumo(periodoAtual);
     });
