@@ -1,6 +1,9 @@
 document.getElementById('form-login').addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    const erroEl = document.getElementById('erro-login');
+    erroEl.textContent = '';
+
     const dados = Object.fromEntries(new FormData(e.target));
 
     try {
@@ -8,12 +11,15 @@ document.getElementById('form-login').addEventListener('submit', async (e) => {
         Auth.salvar(resposta);
         window.location.href = 'dashboard.html';
     } catch (err) {
-        alert(err.message);
+        erroEl.textContent = err.message;
     }
 });
 
 document.getElementById('form-registro').addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    const erroEl = document.getElementById('erro-registro');
+    erroEl.textContent = '';
 
     const dados = Object.fromEntries(new FormData(e.target));
 
@@ -22,7 +28,7 @@ document.getElementById('form-registro').addEventListener('submit', async (e) =>
         Auth.salvar(resposta);
         window.location.href = 'dashboard.html';
     } catch (err) {
-        alert(err.message);
+        erroEl.textContent = err.message;
     }
 });
 

@@ -7,10 +7,6 @@
     --borda: #29394B;
 }
 
-title {
-    background-color: #EDEAE0;
-}
-
 * {
     box-sizing: border-box;
 }
@@ -18,7 +14,8 @@ title {
 body {
     background-color: var(--bg);
     color: var(--texto);
-    font-family: sans-serif;
+    font-family: 'Inter', sans-serif;
+    padding: 24px
 }
 
 h1, h2 {
@@ -42,13 +39,18 @@ button {
     font-weight: bold;
     cursor: pointer;
     border: none;
+    transition: 0.2s;
 }
 
-body {
-    background-color: var(--bg);
-    color: var(--texto);
-    font-family: sans-serif;
-    padding: 24px;
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--destaque);
+    box-shadow: 0 0 0 2px rgba(212, 167, 60, 0.2);
+}
+
+button:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
 }
 
 h1, h2 {
@@ -163,6 +165,13 @@ hr {
 .tab-periodo.ativo {
     background-color: var(--erro);
     color: var(--texto);
+}
+
+/* Cor da mensagem de erro */
+.erro-form {
+    color: var(--erro);
+    font-size: 13px;
+    margin: 0;
 }
 
 

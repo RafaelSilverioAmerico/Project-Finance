@@ -30,8 +30,14 @@ async function apiRequest(path, {method = 'GET', body} = {}) {
     });
 
     if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.mensagem || 'Erro ao comunicar com o servidor');
+        let mensagem = 'Erro ao comunicar com o servidor';
+        try {
+            const error = await response.json();
+            mensagem = error.mensagem || mensagem;
+        } catch (_) {
+            // corpo vazio ou não é JSON válido — mantém a mensagem genérica
+        }
+        throw new Error(mensagem);
     }
     if (response.status === 204) return null;
     return response.json();
