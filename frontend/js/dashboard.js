@@ -97,3 +97,18 @@ client.onConnect = () => {
 
 client.activate();
 
+document.getElementById('form-categoria').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const dados = Object.fromEntries(new FormData(e.target));
+
+    try {
+        await Api.criarCategoria(dados);
+        e.target.reset();
+    } catch (err) {
+        alert(err.message);
+    }
+
+    carregarCategorias();
+})
+
