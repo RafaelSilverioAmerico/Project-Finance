@@ -33,6 +33,49 @@ document.getElementById('form-gasto').addEventListener("submit", async (e) => {
     }
 });
 
+let chartCategorias = null;
+
+function renderizarChartCategorias(porCategoria) {
+    const ctx = document.getElementById('chart-categorias');
+
+    if (chartCategorias) {
+        chartCategorias.destroy();
+    }
+
+    chartCategorias = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: porCategoria.map(c => c.nome),
+            datasets: [{
+                data: porCategoria.map(c => c.total),
+                backgroundColor: porCategoria.map(c => c.cor),
+            }]
+        }
+    });
+}
+
+let chartDias = null;
+
+function renderizarChartDias(porDia) {
+    const ctx = document.getElementById('chart-dias');
+
+    if (chartDias) {
+        chartDias.destroy();
+    }
+
+    chartDias = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: porDia.map(d => d.data),
+            datasets: [{
+                label: 'Gasto por dia',
+                data: porDia.map(d => d.total),
+                backgroundColor: '#D4A73C',
+            }]
+        }
+    });
+}
+
 async function carregarResumo(periodo) {
     let resumo;
 
@@ -46,6 +89,9 @@ async function carregarResumo(periodo) {
     }
 
     document.getElementById('total-mes').textContent = resumo.total.toFixed(2).replace('.', ',');
+
+    renderizarChartCategorias(resumo.porCategoria);
+    renderizarChartDias(resumo.porDia);
 
     const gastos = await Api.listarGastos(resumo.inicio, resumo.fim);
     const container = document.getElementById('lista-gastos');
