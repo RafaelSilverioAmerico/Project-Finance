@@ -174,4 +174,24 @@ hr {
     margin: 0;
 }
 
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.card {
+    background-color: var(--surface);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 

@@ -40,4 +40,5 @@ document.getElementById('btn-alternar').addEventListener('click', () => {
 
     login.style.display = mostrandoLogin ? 'none' : 'flex';
     registro.style.display = mostrandoLogin ? 'flex' : 'none';
+    document.getElementById('btn-alternar').textContent = mostrandoLogin ? 'Voltar para o menu login' : 'Não tem conta? Cadastre-se';
 });

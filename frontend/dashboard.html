@@ -9,11 +9,11 @@
 </head>
 <body>
 
-<h1>Meu Caixa</h1>
-<span id="user-name"></span>
-<button id="btn-logout">Sair</button>
-
-<hr>
+<header>
+    <h1>Meu Caixa</h1>
+    <span id="user-name"></span>
+    <button id="btn-logout">Sair</button>
+</header>
 
 <div id="periodo-tabs">
     <button class="tab-periodo" data-periodo="diario">Dia</button>
@@ -21,34 +21,54 @@
     <button class="tab-periodo" data-periodo="mensal">Mês</button>
 </div>
 
-<h2 id="resumo-titulo">Resumo</h2>
-<p>Total gasto: R$ <span id="total-mes">0,00</span></p>
+<div class="dashboard-grid">
 
-<h2>Registrar gasto</h2>
-<form id="form-gasto">
-    <input type="text" name="descricao" placeholder="Descrição">
-    <input type="number" name="valor" step="0.01" placeholder="Valor">
-    <input type="date" name="data">
-    <select name="categoriaId" id="select-categoria"></select>
-    <button type="submit">Adicionar</button>
-</form>
+    <div class="card">
+        <h2 id="resumo-titulo">Resumo</h2>
+        <p>Total gasto: R$ <span id="total-mes">0,00</span></p>
+    </div>
 
-<h2>Nova categoria</h2>
-<form id="form-categoria">
-    <input type="text" name="nome" placeholder="Nome da categoria">
-    <input type="text" name="cor" placeholder="#RRGGBB" value="#4E9F3D">
-    <input type="text" name="icone" placeholder="Emoji" value="💸">
-    <button type="submit">Criar categoria</button>
-</form>
+    <div class="card">
+        <h2>Por categoria</h2>
+        <canvas id="chart-categorias"></canvas>
+    </div>
 
-<hr>
+    <div class="card">
+        <h2>Evolução no período</h2>
+        <canvas id="chart-dias"></canvas>
+    </div>
 
-<h2>Lançamentos</h2>
-<div id="lista-gastos"></div>
+    <div class="card" style="grid-column: span 2;">
+        <h2>Registrar gasto</h2>
+        <form id="form-gasto">
+            <input type="text" name="descricao" placeholder="Descrição">
+            <input type="number" name="valor" step="0.01" placeholder="Valor">
+            <input type="date" name="data">
+            <select name="categoriaId" id="select-categoria"></select>
+            <button type="submit">Adicionar</button>
+        </form>
+    </div>
 
+    <div class="card" style="grid-column: span 2;">
+        <h2>Nova categoria</h2>
+        <form id="form-categoria">
+            <input type="text" name="nome" placeholder="Nome da categoria">
+            <input type="text" name="cor" placeholder="#RRGGBB" value="#4E9F3D">
+            <input type="text" name="icone" placeholder="Emoji" value="💸">
+            <button type="submit">Criar categoria</button>
+        </form>
+    </div>
+
+    <div class="card" style="grid-column: span 3;">
+        <h2>Lançamentos</h2>
+        <div id="lista-gastos"></div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.6.1/dist/sockjs.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
-
 <script src="js/api.js"></script>
 <script src="js/dashboard.js"></script>
 </body>
